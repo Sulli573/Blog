@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des articles</h1>
+	<div style="display: flex; gap: 10px; color:white;">
+		<a href="{{path('app_article_form')}}" style="padding:5px;background-color:orange;color:white;text-decoration:none">Ajouter un article</a>
+	</div>
+	<div class="grid grid-cols-2 mb-6" style="gap:20px">
+		{% for article in articles %}
+			<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:5px; border: 2px solid black; align-items:center;">
+				{% if article.image %}
+					<img src="uploads/{{article.image}}" style="width:100%;height:100%;"/>
+				{% endif %}
+
+				<p>{{article.createdAt | date ('Y-m-d')}}</p>
+				<p>{{article.titre}}</p>
+				{# u.truncate(nb de caracteres,ce par quoi ça remplace le reste du texte, si on fini le mot ou pas), u.wordwrap si coupe par mot #}
+				<p>{{article.contenu | u.truncate(220,'...',true)}}</p>
+				<p>{{article.user.pseudo}}</p>
+				{# Si je suis connecté et que je suis l'auteur de l'article #}
+				{% if app.user and app.user == article.user %}
+					<a href="{{path('app_article_form',{'id':article.id})}}" style="padding:5px;background:orange;color:white;text-decoration:none; width:200px; text-align:center;">Modifier</a>
+					<a href="{{path('app_article_delete',{'id':article.id})}}" style="padding:5px;background:orange;color:white;text-decoration:none; width:200px;text-align:center;">Supprimer</a>
+				{% endif %}
+			</div>
+
+		{% endfor %}
+	</div>
+	{{ knp_pagination_render(articles) }}
+
+{% endblock %}

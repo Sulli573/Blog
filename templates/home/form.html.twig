@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{# La variable title change le titre de l'onglet en fonction de si l'utilisateur modifie ou ajoute un article (s'il y a ou pas un paramètre dans l'url) #}
+{% block title %}{{title}}{% endblock %}
+
+{% block body %}
+{# La variable action permet de changer le titre de la page en fonction de si l'utilisateur modifie ou ajoute un article (s'il y a ou pas un paramètre dans l'url) #}
+    <h1>{{action}}</h1>
+    {# Pour que le bouton submit ne se mette pas en haut du formulaire il faut mettre form_row #}
+    {{form_start(form)}}
+    {{form_row(form.titre)}}
+    {{form_row(form.contenu)}}
+    {{form_row(form.imageFile)}}
+    {{form_row(form.categorie)}}
+    <button type="submit"> Envoyer </button>
+    {{form_errors(form)}}
+    {{form_end(form)}}
+    
+{% endblock %}

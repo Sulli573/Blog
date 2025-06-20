@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block title %}{{status_code}}{% endblock %}
+{% block body %}
+<div class="h-[calc(100vh - 220px)] flex flex-col justify-center items-center text-center">
+    <h1 class="text-6xl font-bold text-red-600">Erreur {{status_code}} </h1>
+
+        {% if status_code == "404" %}
+        <p class="text-xl mt-4">La page n'existe pas</p> 
+        {% endif %}
+
+        {% if status_code == "500" %}
+        <p class="text-xl mt-4">Erreur de serveur</p> 
+        {% endif %}
+
+        {% if status_code == "403" %}
+        <p class="text-xl mt-4">Vous n'avez pas l'autorisation</p> 
+        {% endif %}
+        
+    
+</div>
+{% endblock %}

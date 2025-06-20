@@ -1,0 +1,20 @@
+<nav style="padding: 10px; background: grey; display:flex; align-items:center; justify-content: space-between; ">
+	<a href={{path("app_home")}}>
+		<img src="{{asset('blog-49006_640.webp')}}" alt="Logo" style="width: 100px; height: 50px;">
+	</a>
+
+	<ul style="display: flex; gap:20px; list-style-type:none">
+		<li>
+			<a href="{{ path('app_home') }}" class="{% if app.request.get('_route') == "app_home" %} py-2 px-4 rounded-lg bg-[#EDC1CF]/50 {%endif%} hover:bg-[white]">HOME</a>
+		</li>
+		<li>
+			<a href="{{ path('app_about') }}" class="{% if app.request.get('_route') == "app_about" %} py-2 px-4 rounded-lg bg-[#EDC1CF]/50 {%endif%} hover:bg-[white]">ABOUT</a>
+		</li>
+		
+	</ul>
+	{% if app.user %}
+		<a href="{{path('app_logout')}}" class="btn btn-accent">Deconnexion</a>
+	{% else %}
+		<a href="{{path('app_login')}}" class="text-white btn btn-accent">Connexion</a>
+	{% endif %}	
+</nav>
