@@ -41,8 +41,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $pseudo = null;
 
-
-
     /**
      * @var Collection<int, Commentaire>
      */
@@ -63,7 +61,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-      
         $this->commentaires = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }

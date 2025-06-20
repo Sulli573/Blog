@@ -6,10 +6,11 @@
     <h1>Ajouter un nouvel article</h1>
     {# Pour que le bouton submit ne se mette pas en haut du formulaire il faut mettre form_row #}
     {{form_start(form)}}
-    {{form_row(form.titre)}}
-    {{form_row(form.contenu)}}
-    {{form_row(form.categorie)}}
-    <button type="submit"> Envoyer </button>
+        {{form_row(form.titre)}}
+        {{form_row(form.contenu)}}
+        {{form_row(form.categorie)}}
+        {{form_row(form.tags)}}
+        <button type="submit">Envoyer</button>
     {{form_end(form)}}
-    
+
 {% endblock %}

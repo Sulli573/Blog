@@ -23,9 +23,6 @@ class NewArticleType extends AbstractType
                 'mapped'=>false,
                 'required'=>false
             ])
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
                 'choice_label' => 'nom',

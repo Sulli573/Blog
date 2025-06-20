@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\NewArticleType;
 use App\Repository\ArticleRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
@@ -79,7 +80,6 @@ final class HomeController extends AbstractController
     // Gràce à Security injectée dans la fonction il ets possible de récupérer ensuite l'utilisateur avec $security->getUser()
     public function delete(?Article $article, EntityManagerInterface $em, ?Security $security)
     {
-       
         //récupérer l'utisateur connecté
         //    $user=$this->getUser();
         //    //récupérer l'user qui a créé l'article
@@ -100,14 +100,17 @@ final class HomeController extends AbstractController
         return $this->redirectToRoute('app_home');
     }
     //route avec parametre optionnel
+    
     #[Route('/article/form/{id?}', name: 'app_article_form')]
+    #[IsGranted('ROLE_USER')]
     //SI vous n'avez pas le rôle admin, vous ne pourrez pas accéder à cette méthode
     public function form(?Article $article, Request $request, EntityManagerInterface $em)
     {
         if (!$article) {
-            # code...
             $article = new Article();
+            $article->setCreatedAt(new \DateTimeImmutable("now"));
         }
+
         //actionType permet de mettre le titre de la page "Ajouter un article" si pas de paramètre dans l'url et "Modifier un article" si un paramètre 
         $actionType = "Ajouter un article";
         //$title permet de mettre "New article" dans l'onglet du navigateur si on ajoute, et "Edit article" si on modifie

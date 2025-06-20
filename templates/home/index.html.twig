@@ -5,9 +5,11 @@
 
 {% block body %}
 	<h1>Liste des articles</h1>
+	{% if app.user %}
 	<div style="display: flex; gap: 10px; color:white;">
 		<a href="{{path('app_article_form')}}" style="padding:5px;background-color:orange;color:white;text-decoration:none">Ajouter un article</a>
 	</div>
+	{% endif %}
 	<div class="grid grid-cols-2 mb-6" style="gap:20px">
 		{% for article in articles %}
 			<div style="display:flex;flex-direction:column;gap:10px;margin-bottom:5px; border: 2px solid black; align-items:center;">
